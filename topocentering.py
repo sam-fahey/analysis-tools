@@ -29,7 +29,17 @@ def sources( ra, dec, time ):
     return src
 
 def topo_correction( detector_obs, followup_obs, sources ):
-
+    """ Return time adjustment for signal transit at follow-up observatory
+    :type   detector_obs: ephem.Observer()
+    :param  detector_obs: observatory which detected the sources
+    
+    :type   followup_obs: ephem.Observer()
+    :param  followup_obs: observatory which is looking for simultaneous archived detection (IceCube)
+    
+    :type   detector_obs: sources() object, defined above
+    :param  detector_obs: sources (e.g. FRBs) detected by detector_obs
+    """
+    
     time_diffs = np.zeros(len(sources['ra']))
     for j in range(len(sources['ra'])):
         ra = sources['ra'][j]
