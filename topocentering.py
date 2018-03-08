@@ -28,7 +28,7 @@ def sources( ra, dec, time ):
     src['t'] = np.array(time, dtype=datetime)
     return src
 
-def topo_correction( detector_obs, followup_obs, sources ):
+def topocentric_correction( detector_obs, followup_obs, sources ):
     """ Return time adjustment for signal transit at follow-up observatory
     :type   detector_obs: ephem.Observer()
     :param  detector_obs: observatory which detected the sources
@@ -61,12 +61,18 @@ def topo_correction( detector_obs, followup_obs, sources ):
     return time_diffs
 
 def run_example():
+    """ An example case of topocentric_correction()
+    FRB 121102 was detected by Arecibo observatory at datetime(2012, 11, 02, 06, 47, 17, 117000).
+    run_example prints the time that must be added to the FRB's detection time for IceCube's
+    use in a neutrino coincidence search. This is the light-time between Arecibo and IceCube along the
+    FRB signal's path of transit.
+    """
 
     icecube = observer( np.radians(0.), np.radians(-90.), 2835 )
     arecibo = observer( np.radians(66. + 45./60 + 10./3600)*-1., np.radians(18. + 20./60 + 39./3600), 497 )
-    frb121102 = sources( (5. + 32./60)/24 * 2*np.pi, np.radians(33. + 8./60), datetime(2012, 11, 02, 06, 47, 17) )
+    frb121102 = sources( (5. + 32./60)/24 * 2*np.pi, np.radians(33. + 8./60), datetime(2012, 11, 02, 06, 47, 17, 117000) )
 
-    print topo_correction( arecibo, icecube, frb121102 )
+    print topocentric_correction( arecibo, icecube, frb121102 )
     # output: [0.03177779]
     # signal expected to traverse IceCube (followup) 31.78 ms after Arecibo (detector) detection of source.
 
