@@ -6,9 +6,9 @@ from datetime import datetime
 
 def observer( longitude, latitude, elevation ):
     obs = ephem.Observer()
-    obs.lon = longitude
-    obs.lat = latitude
-    obs.elevation = elevation
+    obs.lon = longitude # expects radians (East+/West-)
+    obs.lat = latitude # expects radians (North+/South-)
+    obs.elevation = elevation # height above sea level in meters
     return obs
 
 def sources( ra, dec, time ):
