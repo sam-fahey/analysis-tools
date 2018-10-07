@@ -1,6 +1,6 @@
 # analysis-tools
 
-This folder is for software tools that, although written to solve specific problems in my analyses, may be applied to a broader set of analyses.
+This folder is for software tools that were written to solve specific problems in my analyses but may be applied to a broader set of analyses.
 
 ## Topocentering
 
